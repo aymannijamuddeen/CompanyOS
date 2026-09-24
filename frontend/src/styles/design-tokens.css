@@ -1,0 +1,195 @@
+/* GAMBI Design System - Zero glassmorphism, zero AI slop */
+
+:root {
+  /* Typography */
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  
+  /* Type Scale - locked, no arbitrary sizes */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 32px;
+  --text-3xl: 48px;
+  
+  /* Color System - flat, no gradients except one VIP badge */
+  --surface-base: #0B0D10;
+  --surface-card: #12151A;
+  --surface-raised: #1A1E24;
+  
+  --text-primary: #F2F3F5;
+  --text-secondary: #9AA1AC;
+  --text-disabled: #5B6270;
+  
+  --color-win: #1FB177;
+  --color-loss: #E5484D;
+  --color-accent: #E8A33D;
+  --color-info: #3B82C4;
+
+  /* Compatibility & Semantic aliases */
+  --surface-color: var(--surface-card);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --bubble-bg: var(--surface-raised);
+  --color-primary: var(--color-accent);
+  
+  /* Shape & Elevation */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-max: 8px;
+  
+  --border-subtle: 1px solid rgba(255, 255, 255, 0.08);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.4);
+  
+  /* Motion - snappy, not floaty */
+  --duration-fast: 80ms;
+  --duration-normal: 150ms;
+  --duration-slow: 300ms;
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  
+  /* Layout */
+  --header-height: 64px;
+  --sidebar-width: 240px;
+  --max-content-width: 1440px;
+  
+  /* Z-index scale */
+  --z-base: 1;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+}
+
+/* Typography Classes */
+.text-display { font-family: var(--font-display); }
+.text-body { font-family: var(--font-body); }
+.text-mono { 
+  font-family: var(--font-mono); 
+  font-variant-numeric: tabular-nums;
+}
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--surface-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Button System - solid, sharp state changes */
+.btn {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: #000;
+}
+
+.btn-primary:hover {
+  background-color: #D6932F;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: var(--border-subtle);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.btn-destructive {
+  background-color: var(--color-loss);
+  color: var(--text-primary);
+}
+
+.btn-destructive:hover {
+  background-color: #D03E43;
+}
+
+/* Card System */
+.card {
+  background-color: var(--surface-card);
+  border-radius: var(--radius-md);
+  border: var(--border-subtle);
+  box-shadow: var(--shadow-card);
+}
+
+.card-raised {
+  background-color: var(--surface-raised);
+}
+
+/* Input System */
+.input {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  padding: 10px 12px;
+  background-color: var(--surface-raised);
+  border: var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--duration-fast);
+}
+
+.input:focus {
+  border-color: var(--color-accent);
+}
+
+.input::placeholder {
+  color: var(--text-disabled);
+}
+
+/* Number counter animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.counter-animate {
+  animation: countUp var(--duration-normal) var(--ease-out);
+}
+
+/* VIP Gradient (ONLY place in codebase) */
+.vip-badge {
+  background: linear-gradient(135deg, #E8A33D 0%, #D6932F 100%);
+  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: #000;
+}
+
+/* Utility Classes */
+.text-win { color: var(--color-win); }
+.text-loss { color: var(--color-loss); }
+.text-accent { color: var(--color-accent); }
+.text-muted { color: var(--text-secondary); }
+
+/* NO BLUR ANYWHERE - enforce at lint level */
+/* backdrop-filter: blur() is BANNED */
